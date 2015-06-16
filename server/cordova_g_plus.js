@@ -38,7 +38,7 @@ Accounts.registerLoginHandler(function(req) { // cordova_g_plus SignIn handler
                 };
 
                 if (req.profile && (req.profile instanceof Array)) { // fill profile according to req.profile
-                    if (0 < req.profile) {
+                    if (0 < req.profile.length) {
                         insertObject.profile = {};
 
                         for (var A = 0; A < req.profile.length; A++) {
