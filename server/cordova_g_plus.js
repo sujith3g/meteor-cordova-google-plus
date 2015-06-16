@@ -32,7 +32,7 @@ Accounts.registerLoginHandler(function(req) { // cordova_g_plus SignIn handler
                     // profile: googleResponse,
                     services: {
                         google: _.extend(googleResponse, {
-                            accessToken: req.oauthToken
+                            accessToken: req.oAuthToken
                         })
                     }
                 };

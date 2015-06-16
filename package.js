@@ -2,7 +2,7 @@ Package.describe({
     name: "hedcet:cordova-google-plus-native-sign-in",
     summary: "cordova google-plus native signIn",
     documentation: "README.md",
-    version: "0.0.3",
+    version: "0.0.4",
     git: "https://github.com/sujith3g/meteor-cordova-google-plus.git"
 });
 
@@ -16,7 +16,7 @@ Package.onUse(function(api) {
     api.use([
         "accounts-base"
     ], ["client", "server"]);
-    api.use(["http"], ["server"]);
+    api.use(["http", "underscore"], ["server"]);
 
     api.imply(["accounts-base"], ["client", "server"]);
 
