@@ -27,13 +27,13 @@ Accounts.registerLoginHandler(function(req) { // cordova_g_plus SignIn handler
                 googleResponse.id = googleResponse.sub;
                 delete googleResponse.sub;
 
+                googleResponse["accessToken"] = req.oAuthToken;
+
                 var insertObject = {
                     createdAt: new Date(),
                     // profile: googleResponse,
                     services: {
-                        google: _.extend(googleResponse, {
-                            accessToken: req.oAuthToken
-                        })
+                        google: googleResponse
                     }
                 };
 
