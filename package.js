@@ -2,7 +2,7 @@ Package.describe({
     name: "hedcet:cordova-google-plus-native-sign-in",
     summary: "cordova google-plus native signIn",
     documentation: "README.md",
-    version: "0.0.7",
+    version: "0.0.8",
     git: "https://github.com/sujith3g/meteor-cordova-google-plus.git"
 });
 
