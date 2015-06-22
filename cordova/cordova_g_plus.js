@@ -11,12 +11,8 @@ Meteor.cordova_g_plus = function(request, callback) {
             });
         },
         function(error) {
-            if (typeof callback == "function") {
-                callback(error);
-            } else {
-                alert(error);
-            }
-
+            if (callback && (typeof callback == "function")) callback(error);
+            else alert(error);
         }
     );
 };
