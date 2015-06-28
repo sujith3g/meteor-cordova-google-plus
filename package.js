@@ -28,3 +28,8 @@ Package.onUse(function(api) {
         "cordova/cordova_g_plus.js"
     ], ["web.cordova"]);
 });
+Package.onTest(function(api) {
+  api.use(['tinytest','test-helpers']);
+  api.use('hedcet:cordova-google-plus-native-sign-in-dev');
+  api.addFiles('tests/client/cordova-gplus-test.js', "client");
+});
