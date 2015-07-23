@@ -3,7 +3,7 @@ Accounts.registerLoginHandler(function(req) { // cordova_g_plus SignIn handler
         return undefined;
 
     var user = Meteor.users.findOne({
-            "services.google.email": req.email,
+            // "services.google.email": req.email,
             "services.google.id": req.sub
         }),
         userId = null;
