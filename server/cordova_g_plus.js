@@ -2,6 +2,13 @@ Accounts.registerLoginHandler(function(req) { // cordova_g_plus SignIn handler
     if (!req.cordova_g_plus)
         return undefined;
 
+    check(req, {
+        cordova_g_plus: Boolean,
+        email: String,
+        oAuthToken: String,
+        sub: String
+    });
+
     var user = Meteor.users.findOne({
             // "services.google.email": req.email,
             "services.google.id": req.sub
