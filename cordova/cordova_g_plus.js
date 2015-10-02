@@ -14,7 +14,9 @@ Meteor.cordova_g_plus = function(request, callback) {
      * @param {Function} callback `callback` function can have one argument `error` which will be containing the details of error if any
      */
 
-    window.plugins.googleplus.login({},
+    window.plugins.googleplus.login({
+            offline: true
+        },
         function(response) {
             request.email = response.email;
             request.oAuthToken = response.oauthToken;
