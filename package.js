@@ -14,7 +14,8 @@ Package.onUse(function(api) {
     api.versionsFrom("METEOR@1.0");
 
     api.use([
-        "accounts-base"
+        "accounts-base",
+        "check"
     ], ["client", "server"]);
     api.use(["http", "underscore"], ["server"]);
 
