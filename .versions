@@ -19,13 +19,13 @@ ecmascript@0.1.6
 ecmascript-runtime@0.2.6
 ejson@1.0.7
 geojson-utils@1.0.4
-hedcet:cordova-google-plus-native-sign-in@0.1.1
+hedcet:cordova-google-plus-native-sign-in@1.1.0
 html-tools@1.0.5
 htmljs@1.0.5
 http@1.1.1
 id-map@1.0.4
 jquery@1.11.4
-local-test:hedcet:cordova-google-plus-native-sign-in@0.1.1
+local-test:hedcet:cordova-google-plus-native-sign-in@1.1.0
 localstorage@1.0.5
 logging@1.0.8
 meteor@1.1.10
