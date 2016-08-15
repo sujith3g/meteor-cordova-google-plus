@@ -15,7 +15,7 @@ Meteor.cordova_g_plus = function(request, callback) {
      */
     window.plugins.googleplus.login({
             offline: true,
-            webClientId: request.clientId
+            webClientId: request.webClientId
         },
         function(response) {
             request.email = response.email;
