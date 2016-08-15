@@ -13,13 +13,13 @@ Meteor.cordova_g_plus = function(request, callback) {
      * @param {Array} request.profile Is an array of profile properties required, eg. `["email", "email_verified", "gender"]`
      * @param {Function} callback `callback` function can have one argument `error` which will be containing the details of error if any
      */
-
     window.plugins.googleplus.login({
-            offline: true
+            offline: true,
+            webClientId: request.clientId
         },
         function(response) {
             request.email = response.email;
-            request.oAuthToken = response.oauthToken;
+            request.idToken = response.idToken;
             request.sub = response.userId;
 
             Accounts.callLoginMethod({ // call cordova_g_plus SignIn handler @ server
@@ -28,8 +28,8 @@ Meteor.cordova_g_plus = function(request, callback) {
             });
         },
         function(error) {
+            alert(error);
             if (callback && (typeof callback == "function")) callback(error);
-            else alert(error);
         }
     );
 };
