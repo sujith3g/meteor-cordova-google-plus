@@ -6,6 +6,7 @@ Accounts.registerLoginHandler(function(req) { // cordova_g_plus SignIn handler
         cordova_g_plus: Boolean,
         email: String,
         idToken: String,
+        webClientId: String,
         profile: Match.Any,
         sub: String
     });
