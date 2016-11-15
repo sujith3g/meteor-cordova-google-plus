@@ -5,7 +5,8 @@ Accounts.registerLoginHandler(function(req) { // cordova_g_plus SignIn handler
     check(req, {
         cordova_g_plus: Boolean,
         email: String,
-        oAuthToken: String,
+        idToken: String,
+        webClientId: String,
         profile: Match.Any,
         sub: String
     });
@@ -17,13 +18,12 @@ Accounts.registerLoginHandler(function(req) { // cordova_g_plus SignIn handler
         userId = null;
 
     if (!user) {
-        var res = Meteor.http.get("https://www.googleapis.com/oauth2/v3/userinfo", {
+        var res = Meteor.http.get("https://www.googleapis.com/oauth2/v3/tokeninfo", {
             headers: {
                 "User-Agent": "Meteor/1.0"
             },
-
             params: {
-                access_token: req.oAuthToken
+                id_token: req.idToken
             }
         });
 
@@ -32,7 +32,7 @@ Accounts.registerLoginHandler(function(req) { // cordova_g_plus SignIn handler
             if ( /* req.email == res.data.email && */ req.sub == res.data.sub) {
                 var googleResponse = _.pick(res.data, "email", "email_verified", "family_name", "gender", "given_name", "locale", "name", "picture", "profile", "sub");
 
-                googleResponse["accessToken"] = req.oAuthToken;
+                googleResponse["idToken"] = req.idToken;
                 googleResponse["id"] = req.sub;
 
                 if (typeof(googleResponse["email"]) == "undefined") {

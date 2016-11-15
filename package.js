@@ -7,7 +7,7 @@ Package.describe({
 });
 
 Cordova.depends({
-  "cordova-plugin-googleplus": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git#3ae99ea5d24619949613b87cdcb01b407199c253"
+  "cordova-plugin-googleplus": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git#ad47b55a5337cc5064bea4f74da414f2fde6da2f"
 });
 
 Package.onUse(function(api) {
