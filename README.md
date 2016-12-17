@@ -10,14 +10,12 @@ App.info({
   author: "Linto Cheeran",
   description: "Torrent Search & Alert",
   email: "linto.cet@gmail.com",
-  id: "online.linto.torrent", // console.developers.google.com > ClientID For Android > package-name
+  id: "online.linto.torrent", // console.developers.google.com > oAuth2 ClientID > ClientID For Android > package-name
   name: "Torrent Alert",
   website: "https://github.com/HedCET/Torrent-Alert",
   version: "0.0.1",
 });
 ```
-
-For documentation with examples [See Here](https://github.com/sujith3g/meteor-g-plus).
 
 ```js
 // clientSide
@@ -25,7 +23,7 @@ For documentation with examples [See Here](https://github.com/sujith3g/meteor-g-
 if (Meteor.isCordova) {
   Meteor.cordova_g_plus({
     cordova_g_plus: true,
-    profile: ["email", "email_verified", "gender", "locale", "name", "picture"],
+    profile: ["email", "email_verified", "family_name", "gender", "given_name", "locale", "picture"],
     webClientId: '*.apps.googleusercontent.com',
   }, function(error) {
     if (error) {
@@ -35,4 +33,4 @@ if (Meteor.isCordova) {
 }
 ```
 
-
+For documentation with examples [Here](https://github.com/sujith3g/meteor-g-plus).
