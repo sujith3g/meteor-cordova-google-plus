@@ -1,41 +1,60 @@
 Package.describe({
+  documentation: "README.md",
+  git: "https://github.com/sujith3g/meteor-cordova-google-plus.git",
   name: "hedcet:cordova-google-plus-native-sign-in",
   summary: "native SignIn with Google Plus in Meteor Cordova Android/IOS App",
-  documentation: "README.md",
-  version: "1.1.0",
-  git: "https://github.com/sujith3g/meteor-cordova-google-plus.git"
+  version: "1.1.1"
 });
 
 Cordova.depends({
-  "cordova-plugin-googleplus": "https://github.com/EddyVerbruggen/cordova-plugin-googleplus.git#ad47b55a5337cc5064bea4f74da414f2fde6da2f"
+  "cordova-plugin-googleplus": "5.1.1"
 });
 
 Package.onUse(function(api) {
+
   api.versionsFrom("METEOR@1.0");
 
   api.use([
     "accounts-base",
     "check"
-  ], ["client", "server"]);
+  ], [
+    "client",
+    "server"
+  ]);
 
   api.use([
+    "accounts-password",
     "http",
     "underscore"
-  ], ["server"]);
+  ], [
+    "server"
+  ]);
 
-  api.imply(["accounts-base"], ["client", "server"]);
+  api.imply([
+    "accounts-base"
+  ], [
+    "client",
+    "server"
+  ]);
 
   api.add_files([
     "server/cordova_g_plus.js"
-  ], ["server"]);
+  ], [
+    "server"
+  ]);
 
   api.add_files([
     "cordova/cordova_g_plus.js"
-  ], ["web.cordova"]);
+  ], [
+    "web.cordova"
+  ]);
+
 });
 
 Package.onTest(function(api) {
+
   api.use(["hedcet:cordova-google-plus-native-sign-in", "tinytest"]);
 
   api.addFiles("tests/client/cordova_g_plus_test.js", "client");
+
 });
