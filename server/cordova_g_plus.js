@@ -4,35 +4,38 @@ Accounts.registerLoginHandler(function(req) {
 
   check(req.cordova_g_plus, Boolean);
   check(req.email, String);
-  check(req.idToken, String);
+  check(req.id_token, String);
   check(req.profile, [String]);
-  check(req.sub, String);
-  check(req.webClientId, String);
+  check(req.user_id, String);
 
-  var user = Meteor.users.findOne({
+  var token = Accounts._generateStampedLoginToken(),
+    user = Meteor.users.findOne({
       "services.google.email": req.email,
-      "services.google.id": req.sub,
+      "services.google.id": req.user_id,
+      "services.google.id_token": req.id_token,
     }),
     userId = null;
 
-  if (!user) {
+  if (user) {
+    userId = user._id;
+  } else {
     var res = Meteor.http.get("https://www.googleapis.com/oauth2/v3/tokeninfo", {
       headers: {
         "User-Agent": "Meteor/1.0",
       },
       params: {
-        id_token: req.idToken,
+        id_token: req.id_token,
       },
     });
 
     if (res.error) {
       throw res.error;
     } else {
-      if ( /* req.email == res.data.email && */ req.sub == res.data.sub) {
+      if ( /* req.email == res.data.email && */ req.user_id == res.data.sub) {
         var googleResponse = res.data; // _.pick(res.data, "email", "email_verified", "family_name", "gender", "given_name", "locale", "name", "picture", "profile", "sub");
 
-        googleResponse.idToken = req.idToken;
-        googleResponse.id = req.sub;
+        googleResponse.id_token = req.id_token;
+        googleResponse.id = req.user_id;
 
         if (googleResponse.email) {
           googleResponse.email = req.email;
@@ -54,14 +57,10 @@ Accounts.registerLoginHandler(function(req) {
 
         userId = Meteor.users.insert(insertObject);
       } else {
-        throw new Meteor.Error(422, "idToken MISMATCH in hedcet:cordova-google-plus-native-sign-in");
+        throw new Meteor.Error(422, "id_token MISMATCH in hedcet:cordova-google-plus-native-sign-in");
       }
     }
-  } else {
-    userId = user._id;
   }
-
-  var token = Accounts._generateStampedLoginToken();
 
   Meteor.users.update({
     _id: userId,

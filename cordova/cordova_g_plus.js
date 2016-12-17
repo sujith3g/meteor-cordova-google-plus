@@ -11,13 +11,13 @@
 Meteor.cordova_g_plus = function(request, callback) {
   window.plugins.googleplus.login({
       offline: true,
-      webClientId: request.webClientId
+      webClientId: request.webClientId,
     },
 
     function(response) {
       request.email = response.email;
-      request.idToken = response.idToken;
-      request.sub = response.userId;
+      request.id_token = response.idToken;
+      request.user_id = response.userId;
 
       Accounts.callLoginMethod({
         methodArguments: [request],
