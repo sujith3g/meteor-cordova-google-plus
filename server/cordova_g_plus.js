@@ -10,9 +10,9 @@ Accounts.registerLoginHandler(function(req) {
 
   var token = Accounts._generateStampedLoginToken(),
     user = Meteor.users.findOne({
-      "services.google.email": req.email,
+      // "services.google.email": req.email,
       "services.google.id": req.user_id,
-      "services.google.id_token": req.id_token,
+      // "services.google.id_token": req.id_token,
     }),
     userId = null;
 
