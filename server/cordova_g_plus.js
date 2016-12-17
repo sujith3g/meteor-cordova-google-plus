@@ -46,10 +46,12 @@ Accounts.registerLoginHandler(function(req) {
             createdAt: new Date(),
             emails: [{
               address: googleResponse.email,
-              verified: true
+              verified: true,
             }],
             profile: {},
-            "services.google": googleResponse,
+            services: {
+              google: googleResponse,
+            },
           };
 
           if (req.profile.length) {

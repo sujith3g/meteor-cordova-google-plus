@@ -3,9 +3,9 @@
  * @summary function to call native google-plus signIn in cordova only
  * 
  * @param {Boolean} 'request.cordova_g_plus' expected 'true' to call signIn server handle
- * @param {Array} 'request.profile' required properties in user.profile, ex: `["email", "email_verified", "gender"]`
+ * @param {Array} 'request.profile' required properties in user.profile (copied fron response), ex: `["email", "email_verified", "family_name", "gender", "given_name", "locale", "picture"]`
  * 
- * @param {function} 'callback' arg error if any
+ * @param {function} 'callback' only 'error' arg if any
  */
 
 Meteor.cordova_g_plus = function(request, callback) {
