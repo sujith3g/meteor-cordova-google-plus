@@ -16,8 +16,8 @@ Meteor.cordova_g_plus = function(request, callback) {
 
     function(response) {
       request.email = response.email;
-      request.id_token = response.idToken;
-      request.user_id = response.userId;
+      request.idToken = response.idToken;
+      request.userId = response.userId;
 
       Accounts.callLoginMethod({
         methodArguments: [request],
