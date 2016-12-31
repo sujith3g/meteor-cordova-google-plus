@@ -1,5 +1,8 @@
 Cordova Google Plus native SignIn in MeteorJS
 -----------------------------
+
+[![Donate](https://img.shields.io/gratipay/sujith3g.svg)](https://gratipay.com/cordova-google-plus-native-sign-in/)
+
 This is a meteor package for native SignIn with Google Plus in Meteor-Cordova Android/IOS Apps. 
 This package using [cordova-plugin-googleplus](https://www.npmjs.com/package/cordova-plugin-googleplus) Cordova Plugin.
 
