@@ -8,24 +8,18 @@
  * @param {function} 'callback' only 'error' arg if any
  */
 
-Meteor.cordova_g_plus = function(request, callback) {
-  window.plugins.googleplus.login({
-      offline: true,
-      webClientId: request.webClientId,
-    },
+Meteor.cordova_g_plus = function (request, callback) {
+  window.plugins.googleplus.login({ offline: true, webClientId: request.webClientId },
 
-    function(response) {
+    function (response) {
       request.email = response.email;
       request.idToken = response.idToken;
       request.userId = response.userId;
 
-      Accounts.callLoginMethod({
-        methodArguments: [request],
-        userCallback: callback,
-      });
+      Accounts.callLoginMethod({ methodArguments: [request], userCallback: callback });
     },
 
-    function(error) {
+    function (error) {
       if (callback && (typeof callback == "function")) {
         callback(error);
       }

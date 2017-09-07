@@ -1,4 +1,4 @@
-Accounts.registerLoginHandler(function(req) {
+Accounts.registerLoginHandler(function (req) {
   if (!req.cordova_g_plus) {
     return;
   }
@@ -9,14 +9,7 @@ Accounts.registerLoginHandler(function(req) {
   check(req.profile, [String]);
   check(req.userId, String);
 
-  var res = Meteor.http.get("https://www.googleapis.com/oauth2/v3/tokeninfo", {
-    headers: {
-      "User-Agent": "Meteor/1.0",
-    },
-    params: {
-      id_token: req.idToken,
-    },
-  });
+  var res = Meteor.http.get("https://www.googleapis.com/oauth2/v3/tokeninfo", { headers: { "User-Agent": "Meteor/1.0" }, params: { id_token: req.idToken } });
 
   if (res.error) {
     throw res.error;
@@ -24,9 +17,9 @@ Accounts.registerLoginHandler(function(req) {
     if (res.statusCode == 200) {
       if (req.userId == res.data.sub) {
         var user = Meteor.users.findOne({
-            // "services.google.email": req.email,
-            "services.google.id": req.userId,
-          }),
+          // "services.google.email": req.email,
+          "services.google.id": req.userId,
+        }),
           userId = null;
 
         if (user) {
@@ -54,7 +47,7 @@ Accounts.registerLoginHandler(function(req) {
           };
 
           if (req.profile.length) {
-            req.profile.forEach(function(item) {
+            req.profile.forEach(function (item) {
               if (_.has(googleResponse, item)) {
                 insertObject.profile[item] = googleResponse[item];
               }
@@ -65,24 +58,10 @@ Accounts.registerLoginHandler(function(req) {
         }
 
         var TOKEN = Accounts._generateStampedLoginToken();
+        Meteor.users.update(userId, { $push: { "services.resume.loginTokens": Accounts._hashStampedToken(TOKEN) } });
 
-        Meteor.users.update({
-          _id: userId,
-        }, {
-          $push: {
-            "services.resume.loginTokens": Accounts._hashStampedToken(TOKEN),
-          },
-        });
-
-        return {
-          token: TOKEN.token,
-          userId: userId,
-        };
-      } else {
-        throw new Meteor.Error(422, "google.id MISMATCH in hedcet:cordova-google-plus-native-sign-in");
-      }
-    } else {
-      throw new Meteor.Error(422, "google.idToken FAILED in hedcet:cordova-google-plus-native-sign-in");
-    }
+        return { token: TOKEN.token, userId: userId };
+      } else { throw new Meteor.Error(422, "google.id MISMATCH in cordova-google-plus-native-sign-in"); }
+    } else { throw new Meteor.Error(422, "google.idToken FAILED in cordova-google-plus-native-sign-in"); }
   }
 });
